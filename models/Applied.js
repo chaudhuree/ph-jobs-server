@@ -9,6 +9,10 @@ const AppliedSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+  resume: {
+    type: String,
+    required: [true, 'Please upload your resume'],
+  },
   status: {
     type: String,
     enum: ['Pending', 'Accepted', 'Rejected'],
