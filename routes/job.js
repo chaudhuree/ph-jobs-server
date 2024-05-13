@@ -14,7 +14,7 @@ const {
 const { requireAuth } = require("../middleware/authentication.js");
 
 router.route("/job").post(requireAuth, createJob);
-// http://localhost:3000/jobs?search=&category=&jobType=&sortBy=applicants
+// http://localhost:3000/jobs?search=&category=&jobType=&sortBy=applicants&company=&jobLocation=&page=1&limit=10
 router.route("/jobs").get( getAllJobs);
 router.route("/postedjobs").get(requireAuth, getJobsByRecruiter);
 router.route("/jobs/:category").get(requireAuth, getJobsByCategory);
