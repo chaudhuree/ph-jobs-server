@@ -1,0 +1,571 @@
+{
+	"info": {
+		"_postman_id": "5ac0f955-4ff4-4ae7-96ac-5d43370dd435",
+		"name": "Jobs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20773865"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "fireAuth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"chaudhuree@gmail.com\",\r\n    \"displayName\":\"chaudhuree\",\r\n    \"photoURL\":\"https://i.ibb.co/r2LCwp1/chaudhuree.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "isLogin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/islogin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"islogin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"chaudhuree@gmail.com\",\r\n    \"displayName\":\"chaudhuree\",\r\n    \"photoURL\":\"https://i.ibb.co/r2LCwp1/chaudhuree.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "jobs",
+			"item": [
+				{
+					"name": "createJob",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bannerURL\": \"https://www.opencodez.com/wp-content/uploads/2019/10/Full-Stack-Developer.jpeg\",\r\n    \"jobTitle\": \"Dot.Net Developer\",\r\n    \"company\": \"BrainStorm\",\r\n    \"recruiterName\": \"chaudhuree\",\r\n    \"recruiterEmail\": \"chaudhuree@gmail.com\",\r\n    \"category\": \"Part Time\",\r\n    \"jobType\": \"Senior\",\r\n    \"jobDescription\": \"Passionately architect top-line resources with vertical core competencies. Continually reintermediate innovative.\",\r\n    \"salaryRange\": \"80$ - 120$\",\r\n    \"deadline\": \"2024-05-13T01:25:49.558+00:00\",\r\n    \"jobLocation\": \"Gulshan, Dhaka\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/job",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"job"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getJob",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/job/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"job",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "66416c1d9fd41a771a88e46e"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "jobsByCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/jobs/:category",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"jobs",
+								":category"
+							],
+							"variable": [
+								{
+									"key": "category",
+									"value": "Part Time"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateJob",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bannerURL\":\"https://markovate.com/wp-content/uploads/2022/08/top-MERN-Stack.webp\",\r\n    \"jobTitle\":\"MERN stack developer\",\r\n    \"company\":\"Ollyo\",\r\n    \"recruiterName\":\"chaudhuree\",\r\n    \"recruiterEmail\":\"chaudhuree@gmail.com\",\r\n    \"category\":\"On Site\",\r\n    \"jobType\":\"Intermediate\",\r\n    \"jobDescription\":\"Intrinsicly embrace timely niche markets whereas client-focused experiences. Continually drive just in.\",\r\n    \"salaryRange\":\"100$ - 150$\",\r\n    \"deadline\":\"2024-05-15T12:00:00Z\",\r\n    \"jobLocation\":\"Banani,Dhaka\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/job/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"job",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "66416c1d9fd41a771a88e46e"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteJob",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/job/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"job",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6641729fbf8ac919c7110484"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "jobPostedByMe",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/postedjobs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"postedjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllJobs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/jobs?search=&category=&jobType=&sortBy=applicants&company&jobLocation&page&limit",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"jobs"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": ""
+								},
+								{
+									"key": "category",
+									"value": ""
+								},
+								{
+									"key": "jobType",
+									"value": ""
+								},
+								{
+									"key": "sortBy",
+									"value": "applicants"
+								},
+								{
+									"key": "company",
+									"value": null
+								},
+								{
+									"key": "jobLocation",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": null
+								},
+								{
+									"key": "limit",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "applied jobs",
+			"item": [
+				{
+					"name": "apply",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"jobId\":\"664177ccb5b0f6e943892e65\",\r\n    \"resumeLink\":\"https://drive.google.com/file/d/1Q39rNSUbLLVPyj9jfOKW5szj1-CsAaOJ/view?usp=drive_link\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/apply",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "appliedJobs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/appliedjobs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appliedjobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "applicantsForAJob",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/appliedjobs/:jobId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appliedjobs",
+								":jobId"
+							],
+							"variable": [
+								{
+									"key": "jobId",
+									"value": "664177ccb5b0f6e943892e65"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateApplicantsStatus",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\":\"Accepted\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/appliedjob/:appliedId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"appliedjob",
+								":appliedId"
+							],
+							"variable": [
+								{
+									"key": "appliedId",
+									"value": "66417c32beaefc0e229c1869"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkUserAppliedOrNot",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/checkapplied/:jobId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"checkapplied",
+								":jobId"
+							],
+							"variable": [
+								{
+									"key": "jobId",
+									"value": "66417c1bbeaefc0e229c1864"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "notifications",
+			"item": [
+				{
+					"name": "createNotification",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\":\"664161fc123c44da082a0276\",\r\n    \"message\":\"chaudhuree applied for the job MERN stack developer\",\r\n    \"link\":\"/job/123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/notification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"notification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllNotifications",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/notifications",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"notifications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateNotificationStatus",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/notification/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"notification",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "664186a034bb431fc96ee8ac"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "markAllAsRead",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/notifications/markallasread",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"notifications",
+								"markallasread"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "prodUrl",
+			"value": "https://ph-jobs-server.onrender.com/api/v1",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
