@@ -68,5 +68,50 @@ const createJob = async (req, res) => {
       .json({ success: false, message: error.message });
   }
 };
-
-module.exports = { createJob };
+// update job
+const updateJob = async (req, res) => {
+  try {
+    const { id: jobId } = req.params;
+    const job = await Job.findOneAndUpdate(
+      { _id: jobId, recruiter: req.user },
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    if (!job) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ success: false, message: "Job not found" });
+    }
+    res
+      .status(StatusCodes.OK)
+      .json({ success: true, message: "Job updated", job });
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ success: false, message: error.message });
+  }
+};
+// delete job
+const deleteJob = async (req, res) => {
+  try {
+    const { id: jobId } = req.params;
+    const job = await Job.findOneAndDelete({ _id: jobId, recruiter: req.user });
+    if (!job) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ success: false, message: "Job not found" });
+    }
+    res
+      .status(StatusCodes.OK)
+      .json({ success: true, message: "Job deleted", job });
+  }
+  catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ success: false, message: error.message });
+  }
+}
+module.exports = { createJob, updateJob, deleteJob};
