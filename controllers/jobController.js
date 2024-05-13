@@ -25,6 +25,8 @@ const getAllJobs = async (req, res) => {
       category,
       jobType,
       sortBy,
+      company,
+      jobLocation
     } = req.query;
     const query = {};
     if (search) {
@@ -35,6 +37,12 @@ const getAllJobs = async (req, res) => {
     }
     if (jobType) {
       query.jobType = jobType;
+    }
+    if (company) {
+      query.company = company;
+    }
+    if (jobLocation) {
+      query.jobLocation = jobLocation;
     }
     let jobs;
     if (sortBy) {
