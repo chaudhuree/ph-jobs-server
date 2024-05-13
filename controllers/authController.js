@@ -2,6 +2,7 @@ const { StatusCodes } = require("http-status-codes");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
+// login and register
 const fireAuth = async (req, res) => {
   const { email, displayName, photoURL } = req.body;
   try {
@@ -38,11 +39,38 @@ const fireAuth = async (req, res) => {
       .json({ success: false, message: error.message });
   }
 };
+// update user
+const updateUser = async (req, res) => {
+  const { email, displayName, photoURL } = req.body;
+  try {
+    let user;
+    if (email) {
+      user = await User.findOne({ email });
+    }
+    if(!user) return res.status(StatusCodes.NOT_FOUND).json({ success: false, message: "User not found" });
+    if (user) {
+      user = await User.findOneAndUpdate(
+        { email },
+        { displayName, photoURL },
+        { new: true }
+      );
+      res
+        .status(StatusCodes.OK)
+        .json({ success: true, message: "user data updated", user });
+    }
+  } catch (error) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ success: false, message: error.message });
+  }
+};
 
+// check if user is logged in
 const isLogin = (req, res) => {
   res.status(200).json({ success: true, message: "User is logged in" });
 };
 
+// logout user and clear cookie
 const logout = async (req, res) => {
   res
     .clearCookie("token", {
@@ -55,4 +83,4 @@ const logout = async (req, res) => {
     .json({ success: true, message: "Logged out" });
 };
 
-module.exports = { fireAuth, logout, isLogin };
+module.exports = { fireAuth,updateUser, logout, isLogin };
