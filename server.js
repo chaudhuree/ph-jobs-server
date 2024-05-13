@@ -24,6 +24,7 @@ const corsOptions = {
   origin: [
     'http://localhost:5173',
     'https://chaudhuree-jobs.netlify.app',
+    'https://chaudhuree-jobs.onrender.com',
   ],
   credentials: true,
   optionSuccessStatus: 200,
@@ -33,7 +34,7 @@ app.use(cookieParser())
 app.use(morgan("dev"))
 app.use(cors( corsOptions ));
 app.use(xss());
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.urlencoded({ extended: false }));
 app.use(helmet({crossOriginResourcePolicy: false}))
 
 // error handler
