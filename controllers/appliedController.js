@@ -90,7 +90,7 @@ const getAppliedUsersListForJob = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
     const { jobId } = req.params;
-    const applicants = await Applied.find({ job: jobId }).populate("user").sort({ createdAt: 1 }).limit(limit).skip((page - 1) * limit);
+    const applicants = await Applied.find({ job: jobId }).populate("job").populate("user").sort({ createdAt: 1 }).limit(limit).skip((page - 1) * limit);
     const totalApplicants = await Applied.countDocuments({ job: jobId });
     res.status(StatusCodes.OK).json({ success: true, applicants, totalApplicants});
   } catch (error) {

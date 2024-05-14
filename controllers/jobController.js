@@ -1,6 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const Job = require("../models/Jobs");
 const User = require("../models/User");
+const Applied = require("../models/Applied");
 
 // create job
 const createJob = async (req, res) => {
@@ -154,6 +155,7 @@ const deleteJob = async (req, res) => {
   try {
     const { id: jobId } = req.params;
     const job = await Job.findOneAndDelete({ _id: jobId, recruiter: req.user });
+    const applied = await Applied.deleteMany({ job: jobId });
     if (!job) {
       return res
         .status(StatusCodes.NOT_FOUND)
