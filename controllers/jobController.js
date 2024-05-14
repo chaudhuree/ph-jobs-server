@@ -26,7 +26,7 @@ const getAllJobs = async (req, res) => {
       jobType,
       sortBy,
       company,
-      jobLocation
+      jobLocation,
     } = req.query;
     const query = {};
     if (search) {
@@ -95,8 +95,16 @@ const getSingleJob = async (req, res) => {
 // jobs by category
 const getJobsByCategory = async (req, res) => {
   try {
-    const { category } = req.params;
-    const jobs = await Job.find({ category });
+    const { category, limit } = req.params;
+    if(category === 'all'){
+      const jobs = await Job.find().sort({ createdAt: -1 }).limit(limit * 1);
+      return res.status(StatusCodes.OK).json({ success: true, jobs });
+    }
+    const jobs = await Job.find({
+      category: { $regex: category, $options: "i" },
+    })
+      .sort({ createdAt: -1 })
+      .limit(limit * 1);
     res.status(StatusCodes.OK).json({ success: true, jobs });
   } catch (error) {
     res
