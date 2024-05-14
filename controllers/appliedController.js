@@ -54,10 +54,26 @@ const createAppliedJob = async (req, res) => {
 
 // get applied jobs by user (get all jobs applied by a logged in user)
 const getAppliedJobsByUser = async (req, res) => {
+  const category = req.query.category;
   try {
-    const appliedJobs = await Applied.find({ user: req.user }).populate("job");
-    const totalJobs = await Applied.countDocuments({ user: req.user });
-    res.status(StatusCodes.OK).json({ success: true,totalJobs, appliedJobs });
+    const appliedJobs = await Applied.find({ user: req.user })
+      .populate({
+        path: "job",
+      })
+      .populate({
+        path: "job",
+        populate: {
+          path: "recruiter",
+          select: "displayName email photoURL",
+        },
+      }).sort({ createdAt: -1 });
+    if (category) {
+      const filteredJobs = appliedJobs.filter(
+        (job) => job.job.category === category
+      );
+      return res.status(StatusCodes.OK).json({ success: true, appliedJobs: filteredJobs });
+    }
+    res.status(StatusCodes.OK).json({ success: true, appliedJobs });
   } catch (error) {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
