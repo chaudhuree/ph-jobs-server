@@ -33,16 +33,16 @@ const getAllJobs = async (req, res) => {
       query.jobTitle = { $regex: search, $options: "i" };
     }
     if (category) {
-      query.category = category;
+      query.category = { $regex: category, $options: "i" };
     }
     if (jobType) {
-      query.jobType = jobType;
+      query.jobType = { $regex: jobType, $options: "i" };
     }
     if (company) {
-      query.company = company;
+      query.company = { $regex: company, $options: "i" };
     }
     if (jobLocation) {
-      query.jobLocation = jobLocation;
+      query.jobLocation = { $regex: jobLocation, $options: "i" };
     }
     let jobs;
     if (sortBy) {

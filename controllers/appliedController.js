@@ -56,36 +56,43 @@ const createAppliedJob = async (req, res) => {
 const getAppliedJobsByUser = async (req, res) => {
   const category = req.query.category;
   try {
-    const appliedJobs = await Applied.find({ user: req.user })
-      .populate({
-        path: "job",
-      })
-      .populate({
-        path: "job",
-        populate: {
-          path: "recruiter",
-          select: "displayName email photoURL",
-        },
-      }).sort({ createdAt: -1 });
-    if (category) {
-      const filteredJobs = appliedJobs.filter(
-        (job) => job.job.category === category
-      );
-      return res.status(StatusCodes.OK).json({ success: true, appliedJobs: filteredJobs });
-    }
-    res.status(StatusCodes.OK).json({ success: true, appliedJobs });
+    const appliedJobs = await Applied.find({ user: req.user})
+    .populate({
+      path: "job",
+      match: { category: { $regex: category, $options: "i" } },
+    })
+    .populate({
+      path: "job",
+      populate: {
+        path: "recruiter",
+        select: "displayName email photoURL",
+      },
+    }).sort({ status: 1 });
+  
+  if (category) {
+    const filteredJobs = appliedJobs.filter(
+      (job) => job.job.category === category
+    );
+    return res.status(StatusCodes.OK).json({ success: true, appliedJobs: filteredJobs });
+  }
+  res.status(StatusCodes.OK).json({ success: true, appliedJobs });
   } catch (error) {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ success: false, message: error.message });
   }
 };
+
+
 // get applied jobs by jobId (get all users that applied for a job->for recruiters)
 const getAppliedUsersListForJob = async (req, res) => {
   try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
     const { jobId } = req.params;
-    const applicants = await Applied.find({ job: jobId }).populate("user");
-    res.status(StatusCodes.OK).json({ success: true, applicants });
+    const applicants = await Applied.find({ job: jobId }).populate("user").sort({ createdAt: 1 }).limit(limit).skip((page - 1) * limit);
+    const totalApplicants = await Applied.countDocuments({ job: jobId });
+    res.status(StatusCodes.OK).json({ success: true, applicants, totalApplicants});
   } catch (error) {
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
