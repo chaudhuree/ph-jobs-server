@@ -18,7 +18,7 @@ router.route("/job").post(requireAuth, createJob);
 router.route("/jobs").get( getAllJobs);
 router.route("/postedjobs").get(requireAuth, getJobsByRecruiter);
 // http://localhost:3000/jobs/category/limit
-router.route("/jobs/:category/:limit").get(requireAuth, getJobsByCategory);
+router.route("/jobs/:category/:limit").get( getJobsByCategory);
 router
   .route("/job/:id")
   .get(requireAuth, getSingleJob)
