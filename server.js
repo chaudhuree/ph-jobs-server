@@ -5,6 +5,9 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const job = require('./cornJobs.js');
+
+job.start();
 
 
 // extra security packages
